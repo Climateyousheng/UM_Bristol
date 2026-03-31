@@ -126,7 +126,9 @@ However, spun-up results for the carbon cycle are not satisfying. We modified so
 | xqhuj      | Eqbm run, test plant stress (off)                                   | 40             | xqhua          |
 | xqhuk      | Eqbm run, test plant stress (off) and CCN (on)                      | 40             | xqhua          |
 | xqhul      | CMIP7 Emission + GHGs + LU + Solar + Vol                            | 173            | xqhud          |
-| xqhum      | CMIP7 all forcings (+ aerosol), debugging                           | TBC            | <- (xqhul, xqhug) |
+| **xqhum**  | CMIP7 all forcings + aerosol direct effect                          | 173            | <- (xqhul, xqhug) |
+| xqhun      | CMIP7 all forcings + aerosol direct + indirect effect               | TBC            | <- xqhum          |
+| xqhuo      | Test ozone implementation                                           | TBC            | /                  |
 | xqhuu      | check stash                                                         | /              | xqbtn <- xqbmg |
 | xqhuz      | Tuning version of HadCM3C                                           | /              | xqhra          |
 | **xqjlb**  | Dynamic TRIFFID spin-up, tuned params from xqjch                    | 200            | xqhuc          |
@@ -143,7 +145,20 @@ These test whether the equilibrium-TRIFFID tuning results hold under dynamic TRI
 
 ### xqhum
 
-All-forcings run combining `xqhul` (Emission + GHGs + LU + Solar + Vol) with the sulphate aerosol scheme from `xqhug`. Currently being debugged.
+All-forcings run combining `xqhul` (Emission + GHGs + LU + Solar + Vol) with the sulphate aerosol direct effect from `xqhug`. Complete 173-year run.
 
-> [!NOTE]
-> Document bugs and fixes here as they are identified.
+### xqhun
+
+Adds the aerosol indirect effect (ACI) on top of `xqhum`. Currently running for several years and is working.
+
+### xqhuo
+
+Test job for the implementation of ozone forcing. Currently working.
+
+## Future work
+
+1. **Run `xqhun` further**: continue the run to confirm that the indirect aerosol forcing is working correctly once proper forcing data are provided.
+2. **Test ozone**: validate the ozone implementation in `xqhuo` and ensure it integrates correctly with the other forcings.
+3. **CO2 concentration run**: run a CO2-concentration-driven experiment (rather than emission-driven) to verify that the model produces a robust climate response.
+4. **Re-spin-up with all forcings**: after testing is complete, create a new experiment and re-do the spin-up with all forcings (emissions, GHGs, land-use, solar, volcanic, aerosol direct + indirect, ozone) configured from the start. This avoids the model suddenly seeing a new forcing mid-run. The new vegetation/soil parameters from the [tuning ensembles](CMIP7_soil_ensembles.md) should also be applied at this stage.
+5. **CMIP7 production runs**: once the spin-up is stable, carry out the CMIP7 submission experiments.

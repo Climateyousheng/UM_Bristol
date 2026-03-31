@@ -359,3 +359,7 @@ Key findings from the dynamic spin-up experiments:
 5. **xqjlb underperforms its equilibrium counterpart**: score drops from 0.833 (xqjch) to 0.811 (xqjlb), mainly due to increased C4 overestimation (+43% vs +45%) and higher CVeg bias.
 
 6. **Persistent regional weaknesses**: South Asia (GPP −58 to −60%) and South East Asia (GPP −29 to −35%) remain problematic across all experiments, suggesting a structural model bias unrelated to the tuned parameters.
+
+### Further work
+
+- **Re-run dynamic spin-ups from updated base job**: `xqjlb` and `xqjlc` were initialised from `xqhuc`, not from the updated job `xqjcb` which has an updated setup. These spin-ups should be re-run starting from `xqjcb` to ensure the dynamic TRIFFID results are consistent with the latest model configuration.
